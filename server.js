@@ -15,57 +15,57 @@ const connection = mysql.createConnection({
 });
 
 connection.connect(function(err) {
-    console.log("Connected as id" + connected.threadId);
+    console.log("Error");
 
     startScreen();
 });
 
 function startScreen() {
-    inquirer
-     .prompt({
-        type: "list",
-        choices: [
-            "Add a department",
-            "Add a role",
-            "Add an employee",
-            "View all departments", 
-            "View all roles",
-            "View all employees",
-            "Update an employee role",
-            "Depart"
-        ],
-        message: "What task would you like to perform?",
-        name: "option"
-     })
-     .then(function(result){
-        console.log("You entered: " + result.option);
+    inquirer.prompt([
+          {
+            type: "input",
+            choices: [
+                "Add a department",
+                "Add a role",
+                "Add an employee",
+                "View all departments",
+                "View all roles",
+                "View all employees",
+                "Update an employees' role",
+                "Depart"
+            ],
+            message: "Select the task you wish to perform.",
+            name: "task"
+          }
+        ]).then(function(result) {
+        console.log("You entered :" + result.task);
 
-        switch (result.option) {
+        switch (result.task) {
             case "Add a department":
-             addDepartment();
-             break;
+                addDepartment();
+                break;
             case "Add a role":
-             addRole();
-             break;
+                addRole();
+                break;
             case "Add an employee":
-             addEmployee();
-             break;
+                addEmployee();
+                break;
             case "View all departments":
-                viewDepartments();
+                viewDepts();
                 break;
             case "View all roles":
                 viewRoles();
                 break;
             case "View all employees":
-                viewEmployees();
+                viewEmp();
                 break;
-            case "Update an employee role":
-                updateEmployee();
+            case "Update an employees' role":
+                updateEmp();
                 break;
             default:
                 depart();
         }
-     });
+    });
 }
 
 function addDepartment() {
