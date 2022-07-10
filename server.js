@@ -21,8 +21,7 @@ connection.connect(function(err) {
 });
 
 function startScreen() {
-    inquirer.prompt([
-          {
+    inquirer.prompt({
             type: "input",
             choices: [
                 "Add a department",
@@ -36,8 +35,8 @@ function startScreen() {
             ],
             message: "Select the task you wish to perform.",
             name: "task"
-          }
-        ]).then(function(result) {
+        })
+        .then(function(result) {
         console.log("You entered :" + result.task);
 
         switch (result.task) {
