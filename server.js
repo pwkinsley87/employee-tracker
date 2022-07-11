@@ -1,25 +1,46 @@
 const inquirer = require("inquirer");
-const mysql = require("mysql2");
-const consoleTable = require("console.table");
-const db = require("./db");
+// const mysql = require("mysql2");
+// const consoleTable = require("console.table");
+// const db = require("./db");
+
+// get the client
+const mysql = require('mysql2');
+
+// create the connection to database
+// const connection = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'root',
+//   database: 'employee_information',
+//   password: 'Aboutthemshoes.'
+// });
+
+// simple query
+// connection.query(
+//   'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45',
+//   function(err, results, fields) {
+//     console.log(results); // results contains rows returned by server
+//     console.log(fields); // fields contains extra meta data about results, if available
+//   }
+// );
+
 
 const connection = mysql.createConnection({
     host: "localhost",
-    port: 3301, 
+    // port: 3301, 
     user: "root",
     password: "Aboutthemshoes.",
     database: "employee_information"
 });
 
 connection.connect(function(err) {
-    console.log("Error");
+    // console.log("Error", err);
 
     startScreen();
 });
 
 function startScreen() {
     inquirer.prompt([{
-            type: "input",
+            type: "list",
             choices:[
                 "Add a department",
                 "Add a role",
@@ -74,7 +95,7 @@ function addDepartment() {
 
         connection.query("INSERT INTO department (name) VALUES (?)", [answer.deptName], function(err, res) {
             if (err) throw err;
-            console.table(err)
+            console.log(err)
             startScreen()
         })
     })
