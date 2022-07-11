@@ -1,10 +1,7 @@
-const inquirer = import("inquirer");
-const mysql = require("mysql");
+const inquirer = require("inquirer");
+const mysql = require("mysql2");
 const consoleTable = require("console.table");
-const db = require(".");
-const { rootCertificates } = require('tls');
-const { connected } = require('process');
-const { deprecate } = require('util');
+const db = require("./db");
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -23,7 +20,7 @@ connection.connect(function(err) {
 function startScreen() {
     inquirer.prompt([{
             type: "input",
-            choices: [
+            choices:[
                 "Add a department",
                 "Add a role",
                 "Add an employee",
