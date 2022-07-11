@@ -64,7 +64,7 @@ function startScreen() {
                 addRole();
                 break;
             case "Add an employee":
-                addEmployee();
+                addEmp();
                 break;
             case "View all departments":
                 viewDepts();
@@ -96,7 +96,7 @@ function addDepartment() {
         connection.query("INSERT INTO department (name) VALUES (?)", [answer.deptName], function(err, res) {
             if (err) throw err;
             console.log(err)
-            startScreen()
+            startScreen();
         })
     })
 }
@@ -123,12 +123,12 @@ function addRole() {
     connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answer.roleTitle, answer.roleSalary, answer.roleDept], function(err, res) {
         if (err) throw err;
         console.log(res);
-        startScreen;
+        startScreen();
     });
  });
 }
 
-function addEmployee() {
+function addEmp() {
     inquirer.prompt([
         {
             type: "input",
@@ -159,7 +159,7 @@ function addEmployee() {
     });
 }
 
-function updateEmployee() {
+function updateEmp() {
     inquirer.prompt([
         {
             type: "input",
@@ -180,12 +180,12 @@ function updateEmployee() {
     });
 }
 
-function viewDepartment() {
+function viewDepts() {
     let query = "SELECT * FROM department";
     connection.query(query, function(err, res) {
         if (err) throw err; 
         console.table(res);
-        showScreen();
+        startScreen();
     });
 }
 
@@ -194,16 +194,16 @@ function viewRoles() {
     connection.query(query, function(err, res) {
         if (err) throw err;
         console.table(res);
-        showScreen();
+        startScreen();
     });
 }
 
-function viewEmployees() {
+function viewEmp() {
     let query = "SELECT * FROM employee";
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
-        showScreen();
+        startScreen();
     });
 }
 
